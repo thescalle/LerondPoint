@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, site de petites annonces gratuites! {% endblock %}
+
+
+{% block content %}
+
+    <div class="centrer">
+        <div class="jumbotron">
+            <div class="form-group">
+                <h2>Choisisez avec qui parler :</h2><br><br>
+                {%  for messagerie in messageries %}
+                    <a href="/messagerie/{{ messagerie['id'] }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-subtitle mb-2 text-muted">{{ messagerie['userName'] }} {{ messagerie['userFirstName'] }}</h6>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+
+                <br>
+                <div class="d-flex w-100 justify-content-center">
+                    <a href="/messagerie/NewConversation">
+                        <button type="button" class="btn btn-outline-primary" >Nouvelle conversation</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

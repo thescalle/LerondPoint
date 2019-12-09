@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, site de petites annonces gratuites! {% endblock %}
+
+
+{% block content %}
+
+    <div class="centrer-2">
+        <div class="center-3">
+            <br>
+            <br>
+            <br>
+
+            {%  for message in messages %}
+
+                {% if params['userme'].getId() == message.getUserFrom().getId() %}
+                    <div class="alert alert-dismissible alert-info">
+                        <p>Vous : {{ message.getMessage() }}</p>
+                    </div>
+                {% else %}
+                    <div class="alert alert-dismissible alert-primary">
+                        <p>{{ message.getUserFrom().getFirstName() }} : {{ message.getMessage() }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {{ form_start(formMessage) }}
+
+
+            <div class="d-flex w-100 justify-content-between">
+                {{ form_row(formMessage.message,{'attr' : {'placeholder':"Ecrivez un message ..." , 'id':"inputDefault" }}) }}
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-outline-primary" >Envoyer</button>
+                </div>
+            </div>
+
+            {{ form_end(formMessage) }}
+        </div>
+    </div>
+{% endblock %}

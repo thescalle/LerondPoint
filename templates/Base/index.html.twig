@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, site de petites annonces gratuites! {% endblock %}
+
+
+{% block content %}
+
+        <div class="centrer">
+            <div class="jumbotron">
+                <div class="form-group">
+
+                    {{ form_start(formRecherche) }}
+
+
+                    <br>
+                    <h2> Rechercher une annonce :</h2>
+                    <br>
+                    <h4>Sélectionne ta region</h4>
+                    {{ form_row(formRecherche.region) }}
+
+                    <br>
+                    <h4>Sélectionne ta catégorie</h4>
+                    {{ form_row(formRecherche.categorie) }}
+
+                    <br>
+
+
+                    <div class="form-group">
+                        {{ form_row(formRecherche.searchString,{'attr' : {'placeholder':"Que recherche tu ?" , 'id':"inputDefault" }}) }}
+                    </div>
+
+                    <br><br>
+                    <p class="lead">
+                        <button type="submit" class="btn btn-outline-primary" >Rechercher</button>
+                    </p>
+                    {{ form_end(formRecherche) }}
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+
+

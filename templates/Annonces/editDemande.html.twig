@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Demandes : Lerondpoint {% endblock %}
+
+
+{% block content %}
+    <div class="centrer-2">
+        <div class="jumbotron">
+            <br><br>
+            {{ form_start(annonceForm) }}
+            <div class="d-flex w-100 justify-content-center">
+                <div>
+                    <br>
+                    <h2> Modifier une annonce :</h2>
+                    <br>
+
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Annonce :</div>
+                        <div class="card-body">
+
+                            <h4>Sélectionne ta catégorie</h4>
+                            {{ form_row(annonceForm.category) }}
+
+                            <br><br>
+                            <h4>Titre de l'annonce</h4>
+                            {{ form_row(annonceForm.title , {'attr' : {'placeholder':"Entrez le titre de l'annonce" , 'id':"inputLarge" , 'class':"form-control form-control-lg"}}) }}
+                            <br>
+                            <h4>Description de l'annonce</h4>
+                            {{ form_row(annonceForm.description , {'attr' : {'placeholder':"Entrez la description de l'annonce" , 'rows':8}}) }}
+                            <br>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Localisation :</div>
+                        <div class="card-body">
+
+
+                            <h4>Sélectionne ta region</h4>
+                            {{ form_row(annonceForm.region) }}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-outline-primary" >Valider</button>
+            </div>
+
+            {{ form_end(annonceForm) }}
+
+
+        </div>
+    </div>
+{% endblock %}

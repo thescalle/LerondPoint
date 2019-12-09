@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, site de petites annonces gratuites! {% endblock %}
+
+
+{% block content %}
+
+        <div class="centrer-2">
+            <div class="center-3">
+                <div class="jumbotron">
+
+
+
+
+                <div class="jumbotron">
+
+                    <h5>Annonces favorites :</h5>
+
+                    <b>{{ Params['annonceSize'] }} annonces trouvés</b>
+                    <br><br>
+
+
+                    {% if Params['annonceSize'] < 1 %}
+
+                        <div class="textCenter">
+
+                            <h6> Aucun favoris trouvée ! </h6>
+                        </div>
+
+                    {% else %}
+
+
+
+                        {%  for annonce in Annonces %}
+
+
+                            <div class="list-group">
+
+                                <a href="offres/{{ annonce.getOffre().getId() }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1"></h5>
+                                        <small> {{ annonce.getOffre().getDate().format('Y-m-d H:i:s') }}</small>
+                                    </div>
+                                </a>
+                                <a href="offres/{{ annonce.getOffre().getId() }}" class="list-group-item list-group-item-action flex-column align-items-start">
+
+                                    <div class="d-flex w-100 justify-content-md-start">
+                                        <img src="{{ annonce.getOffre().getImage1() }}" width="200" height="150" class="padding-right">
+                                        <div class="padding-right">
+                                            <h5 class="mb-1">{{ annonce.getOffre().getTitle() }}</h5><br>
+                                            <b style="color:orangered;">{{ annonce.getOffre().getPrice() }} euro</b>
+                                            <p>{{ annonce.getOffre().getAddress() }} <br>
+                                                {{ annonce.getOffre().getCategory().getName() }}</p>
+                                        </div>
+                                    </div>
+
+                                    <small class="text-muted">Vendu par : {{ annonce.getOffre().getUser().getFirstName() }}</small>
+                                </a>
+                            </div>
+                            <br>
+                            <form method="post">
+                                <button type="submit" name="rmFav" value="{{ annonce.getId() }}" class="btn btn-outline-info">Retirer des favoris</button>
+                            </form>
+
+                            <br><br><br>
+
+                        {% endfor %}
+
+
+
+
+
+
+
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}

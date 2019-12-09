@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, site de petites annonces gratuites! {% endblock %}
+
+
+{% block content %}
+
+    <div class="centrer">
+        <div class="jumbotron">
+            <div class="form-group">
+                <h3>Creer une conversation :</h3><br>
+                <p>Entrez le nom et prénom de la personne avec<br>   qui vous souhaitez parler</p>
+                {{ form_start(newConv) }}
+
+                <div class="form-group">
+                    <label class="col-form-label" for="inputDefault">Nom</label>
+                    {{ form_row(newConv.name,{'attr' : {'placeholder':"Entrez le nom"}}) }}
+                </div>
+
+                <div class="form-group">
+                    <label class="col-form-label" for="inputDefault">Prénom</label>
+                    {{ form_row(newConv.firstName,{'attr' : {'placeholder':"Entrez le nom"}}) }}
+                </div>
+
+                {% if error is defined %}
+                    <p style="color: red">{{ error }}</p>
+                {% endif %}
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-outline-primary" >Creer</button>
+                </div>
+
+
+
+                {{ form_end(newConv) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

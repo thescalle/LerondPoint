@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, profile  {% endblock %}
+
+
+{% block content %}
+
+    <form>
+        <div class="centrer">
+            <div class="jumbotron">
+                <div class="form-group">
+
+
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Nom :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getName() }}" readonly="">
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Prenom :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getFirstName() }}" readonly="">
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Addresse email :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getEmail() }}" readonly="">
+                        </fieldset>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Addresse :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getAddress() }}" readonly="">
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Ville :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getCity() }}" readonly="">
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+                            <label class="control-label" for="readOnlyInput">Numéro de telephone :</label>
+                            <input class="form-control" id="readOnlyInput" type="text" placeholder="{{ User.getPhone() }}" readonly="">
+                        </fieldset>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+
+{% endblock %}

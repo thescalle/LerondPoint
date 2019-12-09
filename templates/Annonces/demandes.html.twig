@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Demandes : Lerondpoint {% endblock %}
+
+
+{% block content %}
+
+    <div class="centrer-2">
+        <div class="center-3">
+            <div class="jumbotron">
+                <div class="form-group">
+
+                    <br>
+                    {{ form_start(formRecherche) }}
+                    <br>
+
+                    <br>
+                    <h2> Rechercher une demande :</h2>
+                    <br>
+                    <h4>Sélectionne ta region</h4>
+                    {{ form_row(formRecherche.region) }}
+
+                    <br>
+                    <h4>Sélectionne ta catégorie</h4>
+                    {{ form_row(formRecherche.categorie) }}
+                    <br>
+
+                    <div class="form-group">
+                        {{ form_row(formRecherche.searchString,{'attr' : {'placeholder':"Que recherche tu ?" , 'id':"inputDefault" }}) }}
+                    </div>
+
+                    <br>
+                    <p class="lead">
+                        <button type="submit" class="btn btn-outline-primary" >Rechercher</button>
+                    </p>
+                    {{ form_end(formRecherche) }}
+
+                </div>
+            </div>
+
+
+
+            <div class="jumbotron">
+
+                {% if Params['SearchString'] == "" and Params['Categorie'] == "" and Params['Region'] == "" %}<h5>Toutes les annonces :</h5>
+                {% elseif Params['SearchString'] != "" %}
+                    <h5>Annonces pour "{{ Params['SearchString'] }}"  dans "{% if not(Params['Categorie'] == "") %}{{ Params['Categorie'] }}{% else %}Toute les categories{% endif %}" ({% if not(Params['Region'] == "") %}{{ Params['Region'] }}{% else %}Toute la france{% endif %}) :</h5>
+                {% else %}
+                    <h5>Annonces pour "{% if not(Params['Categorie'] == "") %}{{ Params['Categorie'] }}{% else %}Toute les categories{% endif %}"  dans "{% if not(Params['Region'] == "") %}{{ Params['Region'] }}{% else %}Toute la france{% endif %}" :</h5>
+                {% endif %}
+                <b>{{ Params['annonceSize'] }} annonces trouvés</b>
+                <br><br>
+
+
+                {% if Params['annonceSize'] < 1 %}
+
+                    <div class="textCenter">
+
+                        <h6> Aucune demande trouvée ! </h6>
+                        <p>Le manque de résultat peut venir d'une recherche trop ciblée.<br> N'hésite pas à partir d'une recherche avec moins de<br>filtres pour aller vers une recherche plus fine.</p>
+                    </div>
+
+                {% else %}
+
+
+
+                    {%  for annonce in Annonces %}
+
+
+                        <div class="list-group">
+
+                            <a href="demandes/{{ annonce['id'] }}" class="list-group-item list-group-item-action flex-column align-items-start active">
+
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1"></h5>
+                                    <small> {{ annonce['date'] }}</small>
+                                </div>
+                            </a>
+                            <a href="demandes/{{ annonce['id'] }}" class="list-group-item list-group-item-action flex-column align-items-start">
+
+                                <div class="d-flex w-100 justify-content-md-start">
+                                    <div class="padding-right">
+                                        <h5 class="mb-1">{{ annonce['title'] }}</h5><br>
+                                        <p>
+                                            {{ annonce['category'] }}</p>
+                                    </div>
+                                </div>
+
+                                <small class="text-muted">Demandé par : {{ annonce['firstName'] }}</small>
+                            </a>
+                        </div>
+                        <br>
+                    {% endfor %}
+
+
+
+
+
+
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

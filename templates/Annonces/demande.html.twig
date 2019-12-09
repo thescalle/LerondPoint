@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Leronpoint : {{ annonce.getTitle() }}{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="centrer-2">
+        <br>
+        <br>
+        <br>
+        <div class="d-flex w-100 justify-content-around">
+
+            <div class="jumbotron">
+                <div>
+
+
+                    <br>
+                    <div class="d-flex w-100 justify-content-around">
+                        <div>
+                            <h3>{{ annonce.getTitle() }}</h3>
+
+
+                            <h5 style="color:black">Posté le {{ annonce.getDate().format('Y-m-d H:i:s') }}</h5>
+                            <br><br><br>
+                            <h6 style="color: black">Description</h6>
+                            <p>{{ annonce.getDescription() }}</p>
+                            <br>
+                            <h6 style="color: black">Localisation</h6>
+                            <p>{{ annonce.getRegion().getName() }}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="paddin">
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Demandé par :</div>
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="/user/profile?name={{ annonce.getUser().getName() }}&firstname={{ annonce.getUser().getFirstName() }}"  >{{ annonce.getUser().getName() }} {{ annonce.getUser().getFirstName() }}</a></h4>
+                        <br>
+                        {% if params['isLoged'] == true %}
+                        <button type="button" class="btn btn-outline-info">Contacter</button>
+                        {% endif %}
+                        {% if params['isUser'] is defined %}
+                            <button type="button" class="btn btn-outline-info" onclick="window.location.href = '/annonces/demandes/edit/{{ annonce.getId() }}'">Editer</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="d-flex w-100 justify-content-around">
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    var slideIndex = 1;
+
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+    showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    if (n > x.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = x.length}
+    for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+    }
+    x[slideIndex-1].style.display = "block";
+    }
+
+{% endblock %}
+

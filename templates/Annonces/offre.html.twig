@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Leronpoint : {{ annonce.getTitle() }}{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="centrer-2">
+        <br>
+        <br>
+        <br>
+        <div class="d-flex w-100 justify-content-around">
+
+            <div class="jumbotron">
+                <div>
+                    {% if(annonce.getImage1() != '') %}<img class="mySlides" src="{{ annonce.getImage1() }}" >{% endif %}
+                    {% if(annonce.getImage2() != '') %}<img class="mySlides" src="{{ annonce.getImage2() }}" >{% endif %}
+                    {% if(annonce.getImage3() != '') %}<img class="mySlides" src="{{ annonce.getImage3() }}" >{% endif %}
+
+                    {% if(annonce.getImage2() != '') %}<img class="mySlides" src="{{ annonce.getImage2() }}" >
+                    <div class="d-flex w-100 justify-content-center">
+                        <button type="button" class="btn btn-outline-primary" onclick="plusDivs(-1)">&#10094;</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="plusDivs(1)" >&#10095;</button>
+                    </div>
+                    {% endif %}
+
+                    <br>
+                    <div class="d-flex w-100 justify-content-around">
+                        <div>
+                            <h3>{{ annonce.getTitle() }}</h3>
+                                <h5 style="color: orangered;">{{ annonce.getPrice() }} euro</h5>
+
+                            <h5 style="color:black">Posté le {{ annonce.getDate().format('Y-m-d H:i:s') }}</h5>
+                            <br><br><br>
+                            <h6 style="color: black">Description</h6>
+                            <p>{{ annonce.getDescription() }}</p>
+                            <br>
+                            <h6 style="color: black">Localisation</h6>
+                            <p>{{ annonce.getAddress() }}  , {{ annonce.getRegion().getName() }} {% if annonce.getCity() != null %},  {{ annonce.getCity() }} {% endif %}</p>
+                            <br>
+                            <h6 style="color: black">Categorie</h6>
+                            <p>{{ annonce.getCategory().getName() }}  </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="paddin">
+                <div class="card border-info mb-3" style="max-width: 20rem;">
+                    <div class="card-header">Vendu par :</div>
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="/user/profile?name={{ annonce.getUser().getName() }}&firstname={{ annonce.getUser().getFirstName() }}"  >{{ annonce.getUser().getName() }} {{ annonce.getUser().getFirstName() }}</a></h4>
+                        <br>
+
+                        {% if not params['isUser'] is defined %}
+                            {% if params['isLoged'] == true %}
+                            <button type="button" class="btn btn-outline-info">Contacter</button>
+
+                                {% if params['isFav'] == false %}
+                                <form method="post">
+                                    <button type="submit" class="btn btn-outline-info" name="addFav">Ajouter aux favoris</button>
+                                </form>
+                                    {% else %}
+                                <form method="post">
+                                    <button type="submit" class="btn btn-outline-info" name="rmFav">Retirer des favoris</button>
+                                </form>
+                                    {% endif %}
+                            {% endif %}
+                        {% endif %}
+
+                            {% if params['isUser'] is defined %}
+                                <button type="button" class="btn btn-outline-info" onclick="window.location.href = '/annonces/offres/edit/{{ annonce.getId() }}'">Editer</button>
+                            {% endif %}
+
+                    </div>
+                </div>
+                {% if params['isLoged'] == true %}
+                    {% if params['isUser'] is not defined %}
+                        <div class="d-flex w-100 justify-content-around">
+                            <button type="button" class="btn btn-outline-info" onclick="window.location.href = '/annonces/buy/{{ annonce.getId() }}'" >Acheter</button>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                    </div>
+
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    var slideIndex = 1;
+
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+
+{% endblock %}
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        {% block stylesheets %} 
+            <link rel="stylesheet" href="/css/style.css">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            {% block content %}
+            {% endblock %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="/">Lerondpoint</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav mr-auto">
+                        {% if app.session.get('name') %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/annonces/new">Deposer une anonce <span class="sr-only">(current)</span></a>
+                        </li>
+
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/annonces/offres">Offres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/annonces/demandes">Demande</a>
+                        </li>
+                        {% if app.session.get('name') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/annonces/favoris">Annonces favorites</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/messagerie">Messages</a>
+                            </li>
+                        {% endif %}
+                        {% if not app.session.get('name') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/login">Se connecter</a>
+                            </li>
+                        {% endif %}
+                        {% if app.session.get('name') %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/user/profile">Profil</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/loginOut">Se déconnecter</a>
+                            </li>
+
+                        {% endif %}
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Rechercher une anonce" id="textAreaStuf">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="trigger()" >Rechercher</button>
+                    </form>
+                </div>
+            </nav>
+        {% endblock %}
+        <script>
+            {% block javascripts %}{% endblock %}
+            function trigger(){
+                var x = document.getElementById("textAreaStuf").value;
+                var y = x.toString();
+                if(y != "")window.location.replace("/annonces/offres?search="+y);
+            }
+        </script>
+        </body>
+    </body>
+</html>

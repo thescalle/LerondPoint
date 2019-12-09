@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Leronpoint {% endblock %}
+
+
+{% block content %}
+
+
+    <div class="centrer-2">
+        <br>
+        <br>
+        <br>
+        <div class="d-flex w-100 justify-content-around">
+
+            <div class="jumbotron">
+
+                <h4>Etes vous sûre de vouloir acheter cet article : </h4>
+                <h5 style="color: black">"{{ annonce.getTitle() }}"</h5>
+                <p>Vendu par {{ annonce.getUser().getFirstName() }}</p>
+                <br><br>
+                <h4>Comment desirez vous payer ?</h4>
+                <br>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="" onchange="hide()">
+                        <label class="custom-control-label" for="customRadio1">Paypall</label>
+                    </div>
+                <br>
+
+
+                <div id="divToHide">
+                    <div class="card border-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Paypal :</div>
+                        <div class="card-body">
+                            <input type="text" class="form-control" placeholder="Adresse paypal ♫ " id="inputDefault">
+                        </div>
+                    </div><br>
+                </div>
+
+
+
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onchange="hide()">
+                    <label class="custom-control-label" for="customRadio2">Carte banquaire</label>
+                </div><br>
+                <div id="divToHideTwo" style="display: none">
+                    <div class="card border-info mb-3" style="max-width: 20rem;">
+                        <div class="card-header">Carte Bancaire :</div>
+                        <div class="card-body">
+                            <p>Numero de la carte :</p>
+                            <input type="text" class="form-control" placeholder="Entrez votre Numero de la carte :" id="inputDefault">
+                            <br>
+                            <p>Date d'expiration : </p>
+                            <input type="text" class="form-control" placeholder="Entrez la Date d'expiration : " id="inputDefault">
+                            <br>
+                            <p>Cryptogramme visuel : </p>
+                            <input type="text" class="form-control" placeholder="Entrez le Cryptogramme visuel : " id="inputDefault">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br><br>
+                <div class="d-flex w-100 justify-content-around">
+                    <form method="post">
+                        <button type="submit" name="buy" class="btn btn-outline-info" >Confirmer</button>
+                    </form>
+
+
+                    <br>
+                    <button type="button" class="btn btn-outline-info" onclick="cancel()" >Annuler</button></div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+    var isHidden = false;
+
+    function hide(){
+        var x = document.getElementById("divToHide");
+        var y = document.getElementById("divToHideTwo");
+        if(isHidden === false){
+            x.style.display = "none";
+            y.style.display = "block";
+            isHidden = true;
+        }
+        else{
+            x.style.display = "block";
+            y.style.display = "none";
+            isHidden = false;
+        }
+    }
+
+    function cancel(){
+        window.location.replace("/");
+    }
+
+{% endblock %}

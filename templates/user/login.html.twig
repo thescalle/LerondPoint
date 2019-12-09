@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Lerondpoint, se connecter  {% endblock %}
+
+
+{% form_theme  loginForm 'bootstrap_4_layout.html.twig' %}
+
+{% block content %}
+
+    <div class="centrer">
+        <div class="jumbotron">
+            <div class="d-flex w-100 justify-content-center">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register">Créer un compte</a>
+                    </li>
+                </ul>
+            </div>
+            <br>
+            <br>
+
+            {{ form_start(loginForm) }}
+
+            {{ form_row(loginForm.email,{'attr' : {'placeholder':"Entrez votre email"}}) }}
+            {{ form_row(loginForm.password,{'attr' : {'placeholder':"Entrez votre mot de passe"}}) }}
+
+            <p style="color: red">
+                {% if error is defined %}
+                    {{ error }}
+                {% endif %}
+            </p>
+
+
+                <a href="lost-password">Mot de passe oublié ?</a><br><br>
+
+
+
+            <div style="text-align: center;">
+                <button type="submit" class="btn btn-outline-primary" >Se connecter</button>
+            </div>
+
+
+
+            {{ form_end(loginForm) }}
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
