@@ -42,6 +42,7 @@ class ControllerBase extends AbstractController
     {
         // on assaye de choper toutes les regions pour l'affichage
 
+
         $reg = $regRep->findAll();
         $cat = $catRep->findAll();
 
@@ -82,8 +83,7 @@ class ControllerBase extends AbstractController
 
         }
 
-
-
+        var_dump('wesh');
         return $this->render('Base/index.html.twig',[ 'formRecherche' => $form->createView()]);
     }
 
