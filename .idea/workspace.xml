@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="614bb13d-a2c8-45a1-9034-f6210300aa6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AnnonceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AnnonceController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ControllerBase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ControllerBase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MessagerieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MessagerieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RestController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ChangePasswordEntt.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ChangePasswordEntt.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +149,8 @@
       <workItem from="1575889539549" duration="27969000" />
       <workItem from="1575926064794" duration="330000" />
       <workItem from="1575929838134" duration="390000" />
-      <workItem from="1575930308647" duration="553000" />
+      <workItem from="1575930308647" duration="1104000" />
+      <workItem from="1575979935564" duration="641000" />
     </task>
     <servers />
   </component>
