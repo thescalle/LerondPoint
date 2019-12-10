@@ -7,11 +7,11 @@ use App\Entity\Message;
 use App\Repository\MessageRepository;
 use App\Repository\MessagerieRepository;
 use App\Repository\UserRepository;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 
 use App\Service\MessagerieQuery;
 
@@ -36,12 +36,9 @@ class MessagerieController extends AbstractController
         $user = $userRep->findOneBy(['id'=>$this->get('session')->get('id')]);
         $messageries = MessagerieQuery::getAllMessageries($user,$em);
 
-
-
         return $this->render('messagerie/messageries.html.twig',[
             'messageries'=>$messageries
         ]);
-
     }
 
 
@@ -153,7 +150,32 @@ class MessagerieController extends AbstractController
 
 
 
+    /**
+     * @Route("/contacter/{id}", name="contacter")
+     *
+     * on recupere toutes les conversations
+     */
+    public function contacter($id , UserRepository $userRep, MessagerieRepository $msgRep, EntityManagerInterface $em){
 
+        if( $this->get('session')->get('id') == null ) return $this->redirect('/');  // si aucune session n'est activée
+
+        $userMe = $userRep->findOneBy(['id'=> $this->get('session')->get('id')]);
+        $userHe = $userRep->findOneBy(['id'=>$id]);
+
+        $messageries = MessagerieQuery::getAllMessageries($userMe,$em);
+        foreach ($messageries as $value){
+            if($value['userId']== $userHe->getId())return $this->redirect('/messagerie/'.$value['id']);
+        }
+
+        // on doit creer une nouvelle messagerie avec userMe et userHe
+        $newMessagerie = new Messagerie();
+        $newMessagerie->setUserOne($userMe);
+        $newMessagerie->setUserTwo($userHe);
+        $em->persist($newMessagerie);
+        $em->flush();
+
+        return $this->redirect('/messagerie/'.$newMessagerie->getId());
+    }
 
 
 

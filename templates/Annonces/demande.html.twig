@@ -41,7 +41,9 @@
                         <h4 class="card-title"><a href="/user/profile?name={{ annonce.getUser().getName() }}&firstname={{ annonce.getUser().getFirstName() }}"  >{{ annonce.getUser().getName() }} {{ annonce.getUser().getFirstName() }}</a></h4>
                         <br>
                         {% if params['isLoged'] == true %}
-                        <button type="button" class="btn btn-outline-info">Contacter</button>
+                            <form method="post">
+                                <button type="submit" name="contact" class="btn btn-outline-info">Contacter</button>
+                            </form>
                         {% endif %}
                         {% if params['isUser'] is defined %}
                             <button type="button" class="btn btn-outline-info" onclick="window.location.href = '/annonces/demandes/edit/{{ annonce.getId() }}'">Editer</button>

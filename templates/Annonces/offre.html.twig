@@ -55,7 +55,10 @@
 
                         {% if not params['isUser'] is defined %}
                             {% if params['isLoged'] == true %}
-                            <button type="button" class="btn btn-outline-info">Contacter</button>
+                                <form method="post">
+                                    <button type="submit" name="contact" class="btn btn-outline-info">Contacter</button>
+                                </form>
+
 
                                 {% if params['isFav'] == false %}
                                 <form method="post">

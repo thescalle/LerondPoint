@@ -149,6 +149,9 @@ class AnnonceController extends AbstractController
                 $em->flush();
             }
         }
+        else if(isset($_POST['contact'])){
+            return $this->redirect('/contacter/'.$annonce->getUser()->getId());
+        }
 
         if($annonce == null) return $this->render("404.html.twig",[]);
         $params = [];
@@ -260,6 +263,11 @@ class AnnonceController extends AbstractController
         if($annonce == null) return $this->render("404.html.twig",[]);
         $params = [];
         if($this->get('session')->has('id')) if($annonce->getUser()->getId() == $this->get('session')->get('id')) $params['isUser'] = true;
+
+        if(isset($_POST['contact'])){
+            return $this->redirect('/contacter/'.$annonce->getUser()->getId());
+        }
+
 
         if($this->get('session')->has('id')) $params['isLoged'] = true;
         else $params['isLoged'] = false;

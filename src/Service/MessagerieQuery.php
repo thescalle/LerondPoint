@@ -16,11 +16,8 @@ class MessagerieQuery
     {
 
         $queryStr = "SELECT messagerie.id,usr1.id as id1,usr1.name as name1,usr1.first_name as firstName1,usr2.id as id2,usr2.name as name2,usr2.first_name as firstName2 FROM `messagerie` INNER JOIN user as usr1 ON messagerie.user_one_id = usr1.id INNER JOIN user as usr2 ON messagerie.user_two_id = usr2.id WHERE messagerie.user_one_id = :id OR messagerie.user_two_id = :id";
-
         $connection = $em->getConnection();
         $statement = $connection->prepare($queryStr);
-
-
         $statement->bindValue('id', $user->getId());
 
         $statement->execute();
@@ -45,10 +42,10 @@ class MessagerieQuery
             }
             $i++;
         }
-
         return $finalObj;
 
     }
+
 
 
 
